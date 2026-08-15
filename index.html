@@ -1190,10 +1190,7 @@
 
         /* === "Đăng ký" section: 2-column layout === */
         .vc_col-lg-6 { width: 50% !important; float: left; box-sizing: border-box; }
-        @media (max-width: 767px) {
-            .vc_col-lg-6 { width: 100% !important; float: none !important; }
-        }
-
+        
         /* Load Font Awesome nếu chưa có */
         @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css");
 
@@ -1201,14 +1198,42 @@
         .wf-wrap { max-width: 1280px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; }
         .wf-container-main { width: 100%; }
 
-        /* Responsive: stack columns on small screens */
+        /* === Mobile Responsive Fixes (WPBakery) === */
         @media (max-width: 767px) {
-            .vc_col-sm-6,
-            .vc_col-sm-8,
-            .vc_col-sm-4,
-            .vc_col-lg-7,
-            .vc_col-lg-5,
-            .vc_col-sm-1\/5 { width: 100% !important; float: none !important; }
+            /* Tự động bắt mọi class bắt đầu hoặc có chứa vc_col- để chuyển thành 1 cột */
+            [class*="vc_col-"] { 
+                width: 100% !important; 
+                float: none !important; 
+                padding-left: 15px !important; 
+                padding-right: 15px !important;
+                box-sizing: border-box !important;
+            }
+            /* Tránh lỗi tràn lề trái/phải do vc_row có margin âm */
+            .vc_row {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+            /* Chống cuộn ngang (horizontal scrollbar) triệt để trên mọi trình duyệt (cả Safari iOS) */
+            html, body, .wf-wrap {
+                overflow-x: hidden !important;
+                width: 100% !important;
+                position: relative !important;
+                word-wrap: break-word !important;
+            }
+            /* Đảm bảo ảnh không bị tràn ra ngoài khung */
+            img {
+                max-width: 100% !important;
+                height: auto !important;
+            }
+            /* Khống chế các class có width cứng như 800px, 1200px (do theme The7 sinh ra) */
+            .shortcode-single-image-wrap,
+            .wp-video,
+            .wp-video video,
+            .wp-video iframe {
+                max-width: 100% !important;
+                width: 100% !important;
+                height: auto !important;
+            }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
